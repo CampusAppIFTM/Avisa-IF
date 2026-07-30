@@ -1,3 +1,7 @@
+/*
+alteraçoes feitas pela Rebeca
+
+*/
 import { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StackEvents } from './Navigators/StackEvents';
