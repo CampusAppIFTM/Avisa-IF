@@ -18,6 +18,7 @@ export default function App() {
     Poppins_700Bold,
   });
   
+  //Adicionando um comentário para testar o commit da branch adan
   if (!fontsLoaded) return null
   return (
     <NavigationContainer>
