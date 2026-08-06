@@ -8,6 +8,7 @@ import {
 } from '@expo-google-fonts/poppins';
 import {Nav} from '../components/nav'
 const dataMask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
+/* EU, REBECA,  ESTIVE AQUI*/
 
 export function CreateAvisoForm({avisos, setAvisos, navigation}){
   
