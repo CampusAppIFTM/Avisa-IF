@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "230927619642",
+    "project_id": "avisaif-2831a",
+    "storage_bucket": "avisaif-2831a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230927619642:android:25a32325879e7439eac703",
+        "android_client_info": {
+          "package_name": "br.edu.iftm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230927619642-8caur8svmrnungo24gssv412moqkrae7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ8a-MFIwgWc4KbAkJU0j1FY7gGVMmjdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230927619642-8caur8svmrnungo24gssv412moqkrae7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
