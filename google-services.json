@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "831489046595",
+    "project_id": "avisa-if",
+    "storage_bucket": "avisa-if.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831489046595:android:0ea399503b6eab2a9e3cf6",
+        "android_client_info": {
+          "package_name": "edu.br.iftm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831489046595-kt3mmun08rjl6b0pc2e3hk17lkncv3kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7fyeVDmB4iZ2JrCikwJVuAU2ZuFUXCG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831489046595-kt3mmun08rjl6b0pc2e3hk17lkncv3kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
