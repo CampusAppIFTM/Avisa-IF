@@ -1,3 +1,4 @@
+// sempre fazer git config user.name
 import { StyleSheet, Text, View, Button, ActivityIndicator, Image } from "react-native";
 import { useState } from "react";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
