@@ -1,38 +1,74 @@
-import { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { StackEvents } from './Navigators/StackEvents';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import {
-  useFonts,
-  Poppins_400Regular,
-  Poppins_700Bold,
-} from '@expo-google-fonts/poppins';
+import { StyleSheet, Text, View, Button, ActivityIndicator, Image } from "react-native";
+import { useState } from "react";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
-const Drawer = createDrawerNavigator();
+//funções de autenticação
+export const onLogin = async () => {
+  const user = await GoogleSignin.signIn();
+  return user;
+};
 
-export default function App() {
-  const [eventos, setEventos] = useState([]);
-   const [avisos, setAvisos] = useState([]);
-   const [fontsLoaded] = useFonts({
-    Poppins_400Regular,
-    Poppins_700Bold,
-  });
-  
-  //Adicionando um comentário para testar o commit da branch adan
-  if (!fontsLoaded) return null
+export const onLogout = async () => {
+  return await GoogleSignin.signOut();
+};
+
+GoogleSignin.configure({
+  webClientId: "usar o valor obtido do arquivo google-services.json",
+});
+
+// Telas
+const LoginScreen = ({ login }) => {
+  const [isSigninInProgress, setIsSigninInProgress] = useState(false);
+
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen
-          name="Inicio"
-          options={{
-            headerShown: false,
-          }}>
-          {(props) => (
-            <StackEvents {...props} eventos={eventos} setEventos={setEventos} avisos={avisos} setAvisos={setAvisos} />
-          )}
-        </Drawer.Screen>
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <View style={styles.layout}>
+      {isSigninInProgress && <ActivityIndicator />}
+      <Text style={styles.title}>Login</Text>
+      <Button
+        title="entrar"
+        onPress={() => {
+          setIsSigninInProgress(true);
+          onLogin().then((user) => {
+            console.log(user);
+            login(user);
+          });
+        }}
+      />
+    </View>
   );
-}
+};
+
+const HomeScreen = ({ user, login }) => (
+  <View style={styles.layout}>
+    <Text style={styles.title}>Home</Text>
+    <Image
+      style={{ width: 300, height: 300, marginBottom:30, borderRadius: 90 }}
+      source={{
+        uri: user.data.user.photo,
+      }}
+    />
+    <Button title="Sair" onPress={() => onLogout().then(() => login(false))} />
+  </View>
+);
+
+const App = () => {
+  const [user, setUser] = useState(false);
+  return <View style={styles.container}>{user ? <HomeScreen user={user} login={setUser} /> : <LoginScreen login={setUser} />}</View>;
+};
+export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  layout: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#ccc",
+  },
+  title: {
+    fontSize: 32,
+    marginBottom: 16,
+  },
+});
