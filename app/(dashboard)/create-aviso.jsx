@@ -44,8 +44,6 @@ export default function CreateAvisoForm() {
     setData("");
     router.back();
   }
-  console.log("ThemedTextInput:", ThemedTextInput);
-  console.log("ThemedButton:", ThemedButton);
   return (
     <ThemedView style={styles.container} safe = {true}>
       <Nav />

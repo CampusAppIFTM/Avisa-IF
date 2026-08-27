@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "812658550878-2hq5nkluu2au3bapnqlf7sdt4ah10se9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.AvisaIF",
+            "certificate_hash": "f8407a58b866927b255503986b7ac596a3398525"
+          }
+        },
+        {
           "client_id": "812658550878-scpr0ua3d90cd8as7vmdeki38bkqei0j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

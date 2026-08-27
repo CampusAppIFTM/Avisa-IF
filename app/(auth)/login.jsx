@@ -119,7 +119,23 @@ const Login = () => {
             }}
             disabled={loading}
             onPress={handleGoogleLogin}
-          >
+          > <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Image
+            source={require("@/assets/google-logo.png")}
+            style={{
+              width: 33,
+              height: 33,
+              marginRight: 5,
+              resizeMode: "contain",
+            }}
+          />
+          
             <ThemedText
               style={{
                 color: "#333333",
@@ -129,6 +145,7 @@ const Login = () => {
             >
               Entrar com Google
             </ThemedText>
+            </View>
           </ThemedButton>
           <Spacer />
           <ThemedText style={{ textAlign: "center" }}>

@@ -20,7 +20,6 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Nav />
-      <Link href="/login"><Text>Login page</Text></Link>
       <View style={styles.list}>
         <FlatList
           data={eventos}
