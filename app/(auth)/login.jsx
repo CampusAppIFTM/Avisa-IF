@@ -5,6 +5,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { Link } from "expo-router";
 import { useState } from "react";
@@ -100,11 +101,15 @@ const Login = () => {
             }}
             disabled={loading}
             onPress={handleLogin}>
-            <ThemedText
-              style={{ color: "#f2f2f2", fontWeight: "bold", fontSize: 20 }}
-            >
-              Entrar
-            </ThemedText>
+            {loading ? (
+              <ActivityIndicator color="#f2f2f2" />
+            ) : (
+              <ThemedText
+                style={{ color: "#f2f2f2", fontWeight: "bold", fontSize: 20 }}
+              >
+                Entrar
+              </ThemedText>
+            )}
           </ThemedButton>
           <Spacer />
 
@@ -119,33 +124,37 @@ const Login = () => {
             }}
             disabled={loading}
             onPress={handleGoogleLogin}
-          > <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Image
-            source={require("@/assets/google-logo.png")}
-            style={{
-              width: 33,
-              height: 33,
-              marginRight: 5,
-              resizeMode: "contain",
-            }}
-          />
-          
-            <ThemedText
-              style={{
-                color: "#333333",
-                fontWeight: "bold",
-                fontSize: 17,
-              }}
-            >
-              Entrar com Google
-            </ThemedText>
-            </View>
+          >
+            {loading ? (
+              <ActivityIndicator color="#333333" />
+            ) : (
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  source={require("@/assets/google-logo.png")}
+                  style={{
+                    width: 33,
+                    height: 33,
+                    marginRight: 5,
+                    resizeMode: "contain",
+                  }}
+                />
+                <ThemedText
+                  style={{
+                    color: "#333333",
+                    fontWeight: "bold",
+                    fontSize: 17,
+                  }}
+                >
+                  Entrar com Google
+                </ThemedText>
+              </View>
+            )}
           </ThemedButton>
           <Spacer />
           <ThemedText style={{ textAlign: "center" }}>
