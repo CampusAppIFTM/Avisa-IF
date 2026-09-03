@@ -24,19 +24,6 @@ const Home = () => {
     <SafeAreaView style={styles.container}>
       <Nav />
 
-      <View style={styles.userRow}>
-        <Image
-          source={
-            user?.photoURL
-              ? { uri: user.photoURL }
-              : require("@/assets/logo.png")
-          }
-          style={styles.avatar}
-        />
-        <Text style={styles.userName}>
-          {user?.displayName ?? "Usuário"}
-        </Text>
-      </View>
 
       <View style={styles.list}>
         <FlatList
@@ -86,23 +73,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  userRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "92%",
-    marginTop: 16,
-  },
   avatar: {
     width: 48,
     height: 48,
     borderRadius: 24,
     marginRight: 12,
     backgroundColor: "#e0e0e0",
-  },
-  userName: {
-    fontFamily: "Poppins_400Regular",
-    fontSize: 16,
-    color: "#222",
   },
 
   //flatlist de cards
