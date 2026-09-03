@@ -1,0 +1,120 @@
+import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  Pressable,
+} from "react-native";
+import { router } from "expo-router";
+import { Link } from "expo-router";
+import { Nav } from "@/components/nav";
+import { Card } from "@/components/Card";
+import { useApp } from "@/hooks/useAppHook";
+
+const Home = () => {
+  const [expanded, setExpanded] = useState(false);
+  const { eventos, avisos } = useApp();
+  return (
+    <SafeAreaView style={styles.container}>
+      <Nav />
+      <Link href="/login"><Text>Login page</Text></Link>
+      <View style={styles.list}>
+        <FlatList
+          data={eventos}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <Card evento item={item} />}
+        />
+      </View>
+      <Text></Text>
+
+      <View style={styles.list}>
+        <FlatList
+          data={avisos}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <Card aviso item={item} />}
+        />
+      </View>
+      <>
+        {expanded && (
+          <>
+            <Pressable
+              style={[styles.option, { bottom: 100 }]}
+              onPress={() => router.push("/create-event")}
+            >
+              <Text style={{ fontFamily: "Poppins_400Regular" }}>Evento</Text>
+            </Pressable>
+
+            <Pressable
+              style={[styles.option, { bottom: 150 }]}
+              onPress={() => router.push("/create-aviso")}
+            >
+              <Text style={{ fontFamily: "Poppins_400Regular" }}>Aviso</Text>
+            </Pressable>
+          </>
+        )}
+
+        <Pressable style={styles.fab} onPress={() => setExpanded(!expanded)}>
+          <Text style={styles.fabText}>+</Text>
+        </Pressable>
+      </>
+    </SafeAreaView>
+  );
+};
+export default Home;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+  },
+
+  //flatlist de cards
+  list: {
+    width: "92%",
+    height: "25%",
+    borderRadius: 20,
+    padding: 10,
+    marginTop: 20,
+    backgroundColor: "#b6fca4",
+    justifyContent: "center",
+  },
+
+  //fab
+  fab: {
+    position: "absolute",
+    bottom: 50,
+    right: 20,
+
+    width: 40,
+    height: 40,
+
+    borderRadius: 30,
+
+    justifyContent: "center",
+    alignItems: "center",
+
+    backgroundColor: "#34b514",
+
+    elevation: 5, // Android
+  },
+
+  fabText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+  },
+  //fab options
+  option: {
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "25%",
+    height: "5%",
+    right: 20,
+    padding: 7,
+    borderRadius: 12,
+    backgroundColor: "#34b514",
+  },
+});
