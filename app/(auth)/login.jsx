@@ -5,6 +5,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { Link } from "expo-router";
 import { useState } from "react";
@@ -22,7 +23,7 @@ import ThemedText from "@/components/ThemedText";
 
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,21 @@ const Login = () => {
     } catch (error) {
       console.log(error.code);
       console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+  async function handleGoogleLogin() {
+    try {
+      setLoading(true);
+      await loginWithGoogle();
+    } catch (error) {
+      console.log("================================");
+      console.log("GOOGLE LOGIN ERROR");
+      console.log("code:", error.code);
+      console.log("message:", error.message);
+      console.log("name:", error.name);
+      console.log("================================");
     } finally {
       setLoading(false);
     }
@@ -85,13 +101,61 @@ const Login = () => {
             }}
             disabled={loading}
             onPress={handleLogin}>
-            <ThemedText
-              style={{ color: "#f2f2f2", fontWeight: "bold", fontSize: 20 }}
-            >
-              Entrar
-            </ThemedText>
+            {loading ? (
+              <ActivityIndicator color="#f2f2f2" />
+            ) : (
+              <ThemedText
+                style={{ color: "#f2f2f2", fontWeight: "bold", fontSize: 20 }}
+              >
+                Entrar
+              </ThemedText>
+            )}
           </ThemedButton>
+          <Spacer />
 
+          <ThemedButton
+            style={{
+              width: "70%",
+              height: 50,
+              borderRadius: 10,
+              backgroundColor: "#ffffff",
+              borderWidth: 1,
+              borderColor: "#cccccc",
+            }}
+            disabled={loading}
+            onPress={handleGoogleLogin}
+          >
+            {loading ? (
+              <ActivityIndicator color="#333333" />
+            ) : (
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image
+                  source={require("@/assets/google-logo.png")}
+                  style={{
+                    width: 33,
+                    height: 33,
+                    marginRight: 5,
+                    resizeMode: "contain",
+                  }}
+                />
+                <ThemedText
+                  style={{
+                    color: "#333333",
+                    fontWeight: "bold",
+                    fontSize: 17,
+                  }}
+                >
+                  Entrar com Google
+                </ThemedText>
+              </View>
+            )}
+          </ThemedButton>
           <Spacer />
           <ThemedText style={{ textAlign: "center" }}>
             Não tem uma conta?{" "}

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "812658550878",
+    "project_id": "avisaif",
+    "storage_bucket": "avisaif.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812658550878:android:e95637cc11a572378eaccf",
+        "android_client_info": {
+          "package_name": "com.anonymous.AvisaIF"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "812658550878-2hq5nkluu2au3bapnqlf7sdt4ah10se9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.AvisaIF",
+            "certificate_hash": "f8407a58b866927b255503986b7ac596a3398525"
+          }
+        },
+        {
+          "client_id": "812658550878-scpr0ua3d90cd8as7vmdeki38bkqei0j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.AvisaIF",
+            "certificate_hash": "c1eab715440c8cd275bfc720be44eb470882bcfc"
+          }
+        },
+        {
+          "client_id": "812658550878-kl5fv3qri5mipsp9livllcbfm5i7ngvi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVdXj0PGNvyESX0bTkg9ELXYsxhPtAWDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "812658550878-kl5fv3qri5mipsp9livllcbfm5i7ngvi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

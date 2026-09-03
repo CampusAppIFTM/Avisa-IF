@@ -7,20 +7,37 @@ import {
   TextInput,
   FlatList,
   Pressable,
+  Image,
 } from "react-native";
 import { router } from "expo-router";
 import { Link } from "expo-router";
 import { Nav } from "@/components/nav";
 import { Card } from "@/components/Card";
 import { useApp } from "@/hooks/useAppHook";
+import useAuth from "@/hooks/useAuthHook";
 
 const Home = () => {
   const [expanded, setExpanded] = useState(false);
   const { eventos, avisos } = useApp();
+  const { user } = useAuth();
   return (
     <SafeAreaView style={styles.container}>
       <Nav />
-      <Link href="/login"><Text>Login page</Text></Link>
+
+      <View style={styles.userRow}>
+        <Image
+          source={
+            user?.photoURL
+              ? { uri: user.photoURL }
+              : require("@/assets/logo.png")
+          }
+          style={styles.avatar}
+        />
+        <Text style={styles.userName}>
+          {user?.displayName ?? "Usuário"}
+        </Text>
+      </View>
+
       <View style={styles.list}>
         <FlatList
           data={eventos}
@@ -68,6 +85,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+  },
+  userRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "92%",
+    marginTop: 16,
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    marginRight: 12,
+    backgroundColor: "#e0e0e0",
+  },
+  userName: {
+    fontFamily: "Poppins_400Regular",
+    fontSize: 16,
+    color: "#222",
   },
 
   //flatlist de cards
