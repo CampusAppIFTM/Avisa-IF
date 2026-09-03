@@ -14,6 +14,8 @@ GoogleSignin.configure({
     "812658550878-kl5fv3qri5mipsp9livllcbfm5i7ngvi.apps.googleusercontent.com",
 });
 
+const ALLOWED_GOOGLE_DOMAIN = "iftm.edu.br";
+
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
@@ -44,7 +46,22 @@ export function AuthProvider({ children }) {
 
     const credential = GoogleAuthProvider.credential(idToken)
 
-    await signInWithCredential(auth, credential)
+    const userCredential = await signInWithCredential(auth, credential);
+
+    const email = userCredential.user?.email ?? "";
+    const domain = email.split("@")[1]?.toLowerCase();
+
+    if (domain !== ALLOWED_GOOGLE_DOMAIN) {
+      // Desfaz a sessão: o domínio do e-mail não é institucional
+      await signOut(auth);
+      await GoogleSignin.signOut();
+
+      const restrictedDomainError = new Error(
+        `O acesso é restrito a usuários Google do domínio @${ALLOWED_GOOGLE_DOMAIN}.`
+      );
+      restrictedDomainError.code = "auth/restricted-domain";
+      throw restrictedDomainError;
+    }
   };
   const register = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password);
