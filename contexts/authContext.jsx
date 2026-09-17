@@ -1,9 +1,10 @@
 import { useState, useEffect, createContext } from "react";
 import { auth } from "@/firebase/firebaseConfig"
-import { signInWithEmailAndPassword,
+import {
+  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  onAuthStateChanged, 
+  onAuthStateChanged,
   GoogleAuthProvider,
   signInWithCredential
 } from "firebase/auth";
@@ -33,14 +34,14 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password);
   }
-  const loginWithGoogle = async () =>{
+  const loginWithGoogle = async () => {
     await GoogleSignin.hasPlayServices();
 
     const response = await GoogleSignin.signIn();
 
     const idToken = response.data?.idToken;
 
-    if(!idToken){
+    if (!idToken) {
       throw new Error("Não foi possível obter o idToken Google");
     }
 
@@ -51,14 +52,14 @@ export function AuthProvider({ children }) {
     const email = userCredential.user?.email ?? "";
     const domain = email.split("@")[1]?.toLowerCase();
 
-    if (domain !== ALLOWED_GOOGLE_DOMAIN) {
-      // Desfaz a sessão: o domínio do e-mail não é institucional
+    if (!domain || !domain.endsWith(`.${ALLOWED_GOOGLE_DOMAIN}`) && domain !== ALLOWED_GOOGLE_DOMAIN) {
       await signOut(auth);
       await GoogleSignin.signOut();
 
       const restrictedDomainError = new Error(
         `O acesso é restrito a usuários Google do domínio @${ALLOWED_GOOGLE_DOMAIN}.`
       );
+
       restrictedDomainError.code = "auth/restricted-domain";
       throw restrictedDomainError;
     }
