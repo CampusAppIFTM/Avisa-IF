@@ -3,15 +3,16 @@ import {
   Text,
   View,
   Keyboard,
+  ActivityIndicator,
   TouchableWithoutFeedback,
   Image,
-  ActivityIndicator,
 } from "react-native";
 import { Link } from "expo-router";
 import { useState } from "react";
 
 //hooks
 import useAuth from "@/hooks/useAuthHook";
+import { Colors } from "@/constants/Colors";
 
 //themed components
 import ThemedView from "@/components/ThemedView";
@@ -27,20 +28,24 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleLogin() {
     try {
+      setErrorMessage("");
       setLoading(true);
       await login(email, password);
     } catch (error) {
       console.log(error.code);
       console.log(error.message);
+      setErrorMessage("E-mail ou senha inválidos.");
     } finally {
       setLoading(false);
     }
   }
   async function handleGoogleLogin() {
     try {
+      setErrorMessage("");
       setLoading(true);
       await loginWithGoogle();
     } catch (error) {
@@ -50,6 +55,12 @@ const Login = () => {
       console.log("message:", error.message);
       console.log("name:", error.name);
       console.log("================================");
+
+      if (error.code === "auth/restricted-domain") {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage("Não foi possível entrar com o Google. Tente novamente.");
+      }
     } finally {
       setLoading(false);
     }
@@ -75,6 +86,9 @@ const Login = () => {
             Bem-vindo de volta!
           </ThemedText>
           <ThemedText style={{ right: 60 }}>faça login para continuar</ThemedText>
+          {errorMessage ? (
+            <ThemedText style={styles.error}>{errorMessage}</ThemedText>
+          ) : null}
           <View style={styles.inputContainer}>
             <ThemedText style={{ left: 15 }}>E-MAIL</ThemedText>
             <ThemedTextInput
@@ -93,7 +107,7 @@ const Login = () => {
               secureTextEntry
             />
           </View>
-          <ThemedButton
+<ThemedButton
             style={{
               width: "70%",
               height: 50,
@@ -113,7 +127,7 @@ const Login = () => {
           </ThemedButton>
           <Spacer />
 
-          <ThemedButton
+<ThemedButton
             style={{
               width: "70%",
               height: 50,
@@ -208,12 +222,16 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   error: {
-    //color: Colors.warning,
+    color: Colors.warning,
+    fontWeight: "bold",
+    textAlign: "center",
     padding: 10,
     backgroundColor: "#f5c1c8",
     borderWidth: 1,
+    borderColor: Colors.warning,
     borderRadius: 6,
     marginHorizontal: 10,
+    marginBottom: 10,
   },
   authImage: {
     width: "100%",
@@ -222,6 +240,5 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: 0,
-
-  }
+}
 });
